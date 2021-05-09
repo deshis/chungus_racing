@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CarController2 : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class CarController2 : MonoBehaviour
 
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
+
+    private Vector2 movementInput;
+    private Vector2 brakeInput;
 
     private float horizontalInput;
     private float verticalInput;
@@ -35,6 +39,25 @@ public class CarController2 : MonoBehaviour
     [SerializeField] private Transform rearRightWheelTransform;
 
 
+
+    public void OnMove(InputAction.CallbackContext ctx)
+    {
+        movementInput = ctx.ReadValue<Vector2>();
+    }
+
+    public void OnBrake(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            isBreaking = true;
+        }
+        if (ctx.canceled)
+        {
+            isBreaking = false;
+        }
+    }
+
+
     private void Start() {
         rb.centerOfMass = com.localPosition;    
     }
@@ -47,6 +70,8 @@ public class CarController2 : MonoBehaviour
         HandleSteering();
         UpdateWheels();
         chungus();
+
+        Debug.Log(brakeInput.ToString());
     }
 
     private void chungus()
@@ -66,9 +91,11 @@ public class CarController2 : MonoBehaviour
 
     private void GetInput()
     {
-        horizontalInput = Input.GetAxis(HORIZONTAL);
-        verticalInput = Input.GetAxis(VERTICAL);
-        isBreaking = Input.GetKey(KeyCode.Space);
+        horizontalInput = movementInput.x;
+        verticalInput = movementInput.y;
+        //isBreaking = brakeInput.x;
+
+        Debug.Log(brakeInput.ToString());
     }
 
     private void HandleMotor()

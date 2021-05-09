@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class laps : MonoBehaviour
 {
@@ -28,12 +29,46 @@ public class laps : MonoBehaviour
         lapamount.text = "Lap: 0";
         laptimer.text = "Lap time: ";
         latestlap.text = "Latest lap: N/A";
+
+
+
     }
 
+
+    private void Awake()
+    {
+        if (GameObject.Find("aivohalvaus"))
+        {
+            checkpoint_1 = GameObject.Find("aivohalvaus").GetComponent<maketimerswork>().cp1.transform;
+            checkpoint_2 = GameObject.Find("aivohalvaus").GetComponent<maketimerswork>().cp2.transform;
+            checkpoint_3 = GameObject.Find("aivohalvaus").GetComponent<maketimerswork>().cp3.transform;
+            finishline = GameObject.Find("aivohalvaus").GetComponent<maketimerswork>().finishline.transform;
+
+
+            if (gameObject.transform.name.Substring(gameObject.transform.name.Length-8).Equals("2(Clone)")) {
+                lapamount = GameObject.Find("aivohalvaus").GetComponent<maketimerswork>().amount2;
+                laptimer = GameObject.Find("aivohalvaus").GetComponent<maketimerswork>().timer2;
+                latestlap = GameObject.Find("aivohalvaus").GetComponent<maketimerswork>().latest2;
+            }
+            else
+            {
+                lapamount = GameObject.Find("aivohalvaus").GetComponent<maketimerswork>().amount;
+                laptimer = GameObject.Find("aivohalvaus").GetComponent<maketimerswork>().timer;
+                latestlap = GameObject.Find("aivohalvaus").GetComponent<maketimerswork>().latest;
+            }
+
+        }
+    }
     private void Update()
     {
         laptime += Time.deltaTime;
         laptimer.text = "Lap time: " + laptime.ToString("F2");
+
+        if (thelaps >= 1)
+        {
+            GameObject.Find("chungus").GetComponent<databetweenscenes>().SendMessage("getinfo",transform.gameObject.name);
+            SceneManager.LoadScene("win");
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -54,6 +89,8 @@ public class laps : MonoBehaviour
             {
                 cpvalue = 3;
             }
+
+            Debug.Log(cpvalue);
         }
 
         else if(other.tag.Equals("finishline")&&cpvalue==NumberOfCheckpoints)
@@ -65,4 +102,18 @@ public class laps : MonoBehaviour
             laptime = 0;
         }
     }
+
+    public Transform GetCPValue(){
+        switch(cpvalue){
+            case 1:
+                return checkpoint_1;
+            case 2:
+                return checkpoint_2;
+            case 3:
+                return checkpoint_3;
+        }
+
+        return finishline;
+    }
+
 }
