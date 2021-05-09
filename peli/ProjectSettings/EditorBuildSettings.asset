@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/rata1.unity
     guid: 8e078b8f5123cc24a99215605acbd75e
+  - enabled: 1
+    path: Assets/Scenes/rata2.unity
+    guid: eb56e9c174d268047840927340d4fbc4
   m_configObjects: {}
