@@ -24,6 +24,7 @@ public class databetweenscenes : MonoBehaviour
     public Dropdown spdropdown2;
 
     bool carsspawned = false;
+    bool carsspawned2 = false;
 
     public void getinfo(string player)
     {
@@ -71,10 +72,12 @@ public class databetweenscenes : MonoBehaviour
 
     public void Update()
     {
+        /*
         if (GameObject.Find("god") != null)
         {
             GameObject.Find("god").GetComponent<playerwhowonxd>().SendMessage("ads", playerWon);
         }
+        */
 
         if (GameObject.Find("spawner") != null && !carsspawned)
         {
@@ -84,6 +87,10 @@ public class databetweenscenes : MonoBehaviour
 
 
 
+        }
+        if (GameObject.Find("winspawner") != null && !carsspawned2){
+            GameObject.Find("winspawner").GetComponent<carspawner>().SendMessage("getvictorycar", playerWon);
+            carsspawned2 = true;
         }
     }
 

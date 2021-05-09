@@ -7,6 +7,7 @@ public class carspawner : MonoBehaviour
 
     public GameObject spawn1;
     public GameObject spawn2;
+    public GameObject victoryspawn;
 
     public GameObject cam1;
     public GameObject cam2;
@@ -24,6 +25,8 @@ public class carspawner : MonoBehaviour
 
     string car1;
     string car2;
+    string victorycar;
+    int playerWon;
 
 
     public void getcars(string[] yeah)
@@ -37,7 +40,7 @@ public class carspawner : MonoBehaviour
     {
         switch (car1)
         {
-            case "drift möskiinerrrrrrrrr":
+            case "drift masheen":
                 GameObject a = Instantiate(driftmasheen, spawn1.transform);
                 cam1.GetComponent<CameraFollow>().setTarget(a);
                 break;
@@ -61,7 +64,7 @@ public class carspawner : MonoBehaviour
 
         switch (car2)
         {
-            case "drift möskiinerrrrrrrrr":
+            case "drift masheen":
                 GameObject f = Instantiate(driftmasheen2, spawn2.transform);
                 cam2.GetComponent<CameraFollow>().setTarget(f);
                 break;
@@ -83,4 +86,47 @@ public class carspawner : MonoBehaviour
                 break;
         }
     }
+
+    public void getvictorycar(string yeah)
+    {
+        victorycar = yeah;
+
+        Debug.Log(yeah);
+        Debug.Log(yeah.Substring(yeah.Length-2));
+
+        if(victorycar.Substring(yeah.Length-9).Equals(" 2(Clone)")){
+            victorycar = victorycar.Substring(0, yeah.Length-9);
+            playerWon = 2;
+        }else{
+            playerWon = 1;
+            victorycar = victorycar.Substring(0, yeah.Length-7);
+        }
+
+        spawnvictorycar();
+    }
+
+    private void spawnvictorycar(){
+        Debug.Log(victorycar);
+        switch (victorycar)
+        {
+            case "drift masheen":
+                GameObject a = Instantiate(driftmasheen, victoryspawn.transform);
+                break;
+            case "chungus mobil":
+                GameObject b = Instantiate(chunguslada, victoryspawn.transform);
+                break;
+            case "DaCar":
+                GameObject c = Instantiate(idiot, victoryspawn.transform);
+                break;
+            case "monke":
+                GameObject d = Instantiate(kuutio, victoryspawn.transform);
+                break;
+            case "sex haver":
+                GameObject e = Instantiate(sexhaver, victoryspawn.transform);
+                break;
+        }
+
+        GameObject.Find("god").GetComponent<playerwhowonxd>().SendMessage("ads", "Player    " + playerWon);
+    }
+    
 }
