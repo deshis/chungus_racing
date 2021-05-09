@@ -4175,6 +4175,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: rata2
       m_Image: {fileID: 0}
+    - m_Text: rata3
+      m_Image: {fileID: 0}
     - m_Text: testirata
       m_Image: {fileID: 0}
   m_OnValueChanged:
