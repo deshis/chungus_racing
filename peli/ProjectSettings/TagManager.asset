@@ -7,6 +7,7 @@ TagManager:
   - checkpoint
   - finishline
   - ground
+  - car
   layers:
   - Default
   - TransparentFX

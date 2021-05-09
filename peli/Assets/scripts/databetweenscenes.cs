@@ -46,7 +46,7 @@ public class databetweenscenes : MonoBehaviour
         Debug.Log(player2car);
         Debug.Log(track);
 
-        SceneManager.LoadScene("testirata");
+        SceneManager.LoadScene(track);
 
     }
 

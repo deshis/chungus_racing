@@ -39,10 +39,16 @@ public class CarController2 : MonoBehaviour
     [SerializeField] private Transform rearRightWheelTransform;
 
 
-
     public void OnMove(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>();
+
+
+        if (movementInput != Vector2.zero && !GameObject.Find("carsounds").GetComponent<AudioSource>().isPlaying)
+        {
+            GameObject.Find("carsounds").GetComponent<AudioSource>().Play();
+        }
+
     }
 
     public void OnBrake(InputAction.CallbackContext ctx)
@@ -71,7 +77,7 @@ public class CarController2 : MonoBehaviour
         UpdateWheels();
         chungus();
 
-        Debug.Log(brakeInput.ToString());
+
     }
 
     private void chungus()

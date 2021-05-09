@@ -64,7 +64,7 @@ public class laps : MonoBehaviour
         laptime += Time.deltaTime;
         laptimer.text = "Lap time: " + laptime.ToString("F2");
 
-        if (thelaps >= 0)
+        if (thelaps >= 1)
         {
             GameObject.Find("chungus").GetComponent<databetweenscenes>().SendMessage("getinfo",transform.gameObject.name);
             SceneManager.LoadScene("win");

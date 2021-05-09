@@ -4171,11 +4171,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: track 1
+    - m_Text: rata1
       m_Image: {fileID: 0}
-    - m_Text: track 2
-      m_Image: {fileID: 0}
-    - m_Text: track 3
+    - m_Text: testirata
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

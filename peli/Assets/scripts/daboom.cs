@@ -9,7 +9,7 @@ public class daboom : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "ground")
+        if (collision.gameObject.tag == "car")
         {
             game.GetComponent<AudioSource>().Play();
         }
